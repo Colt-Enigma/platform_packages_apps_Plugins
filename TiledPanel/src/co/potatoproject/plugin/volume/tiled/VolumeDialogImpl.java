@@ -208,7 +208,8 @@ public class VolumeDialogImpl implements VolumeDialog {
         mShowActiveStreamOnly = showActiveStreamOnly();
         mHasSeenODICaptionsTooltip =
                 Prefs.getBoolean(sysuiContext, Prefs.Key.HAS_SEEN_ODI_CAPTIONS_TOOLTIP, false);
-        mLeftVolumeRocker = mSysUIContext.getResources().getBoolean(mSysUIR.bool("config_audioPanelOnLeftSide"));
+        ContentResolver cr = mContext.getContentResolver();
+        mLeftVolumeRocker = Settings.System.getInt(cr, Settings.System.AUDIO_PANEL_LOCATION, 0) != 0;
     }
 
     public void init(int windowType, Callback callback) {
