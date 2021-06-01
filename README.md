@@ -12,6 +12,7 @@ TiledPanel
 MiuiPanel
 P404Panel
 OosPanel
+ShapeShiftPanel
 ```
 
 **Please refrain from altering packagenames/classpaths and Copyright headers**
