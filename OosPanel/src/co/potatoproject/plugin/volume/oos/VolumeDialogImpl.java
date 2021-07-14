@@ -282,7 +282,6 @@ public class VolumeDialogImpl implements VolumeDialog {
         mDialogView.setLayoutParams(dialogViewLP);
 
         mDialogRowsView = mDialog.findViewById(R.id.volume_dialog_rows);
-        mModeIndicator = mDialog.findViewById(R.id.volume_row_type);
         mRinger = mDialog.findViewById(R.id.ringer);
         if (mRinger != null) {
             mRingerIcon = mRinger.findViewById(R.id.ringer_icon);
@@ -1107,8 +1106,6 @@ public class VolumeDialogImpl implements VolumeDialog {
             Drawable ringerDrawable;
             switch (mState.ringerModeInternal) {
                 case AudioManager.RINGER_MODE_VIBRATE:
-                 mModeIndicator.setVisibility(VISIBLE);
-                    mModeIndicator.setText(R.string.volume_ringer_hint_vibrating);
                     ringerDrawable = mSysUIContext.getDrawable(
                         mSysUIR.drawable("ic_volume_ringer_vibrate"));
                     addAccessibilityDescription(mRingerIcon, RINGER_MODE_VIBRATE,
@@ -1116,8 +1113,6 @@ public class VolumeDialogImpl implements VolumeDialog {
                     mRingerIcon.setTag(Events.ICON_STATE_VIBRATE);
                     break;
                 case AudioManager.RINGER_MODE_SILENT:
-                    mModeIndicator.setVisibility(VISIBLE);
-                    mModeIndicator.setText(R.string.volume_ringer_hint_muted);
                     ringerDrawable = mSysUIContext.getDrawable(
                         mSysUIR.drawable("ic_volume_ringer_mute"));
                     mRingerIcon.setTag(Events.ICON_STATE_MUTE);
@@ -1128,16 +1123,12 @@ public class VolumeDialogImpl implements VolumeDialog {
                 default:
                     boolean muted = (mAutomute && ss.level == 0) || ss.muted;
                     if (!isZenMuted && muted) {
-                        mModeIndicator.setVisibility(VISIBLE);
-                        mModeIndicator.setText(R.string.volume_ringer_hint_muted);
                         ringerDrawable = mSysUIContext.getDrawable(
                             mSysUIR.drawable("ic_volume_ringer_mute"));
                         addAccessibilityDescription(mRingerIcon, RINGER_MODE_NORMAL,
                                 mSysUIContext.getString(mSysUIR.string("volume_ringer_hint_unmute")));
                         mRingerIcon.setTag(Events.ICON_STATE_MUTE);
                     } else {
-                        mModeIndicator.setVisibility(VISIBLE);
-                        mModeIndicator.setText(R.string.volume_ringer_hint_unmuted);
                         ringerDrawable = mSysUIContext.getDrawable(
                             mSysUIR.drawable("ic_volume_ringer"));
                         if (mController.hasVibrator()) {
